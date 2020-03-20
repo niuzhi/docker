@@ -1,16 +1,14 @@
-FROM alpine:3.11 as dotCMSDemo
+FROM docker/compose as dotCMSDemo
 
 LABEL com.dotcms.contact "info@dotcms.com"
 LABEL com.dotcms.vendor "dotCMS LLC"
 LABEL com.dotcms.description "dotCMS Content Management System"
 
 
+# adding some utilities
+RUN apk  update && apk --no-cache add curl bash wget git grep sed docker 
 
-
-RUN apk  update && apk --no-cache add curl bash wget git grep sed docker py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
-#RUN adduser -u 120101   dotcms 
-RUN pip install docker-compose
-
+## download the latest docker-compose file from our github repo
 RUN mkdir -p /dotcms \
     && cd /dotcms \
     && wget -q https://raw.githubusercontent.com/dotCMS/docker/master/referenceImplementations/02-single_node/docker-compose.yml
