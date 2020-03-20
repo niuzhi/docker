@@ -9,10 +9,7 @@ LABEL com.dotcms.description "dotCMS Content Management System"
 RUN apk  update && apk --no-cache add curl bash wget git grep sed docker 
 
 ## download the latest docker-compose file from our github repo
-RUN mkdir -p /dotcms \
-    && cd /dotcms \
-    && wget -q https://raw.githubusercontent.com/dotCMS/docker/master/referenceImplementations/02-single_node/docker-compose.yml
-
+RUN mkdir -p /dotcms
 
 COPY ROOT/ /
 WORKDIR /dotcms
